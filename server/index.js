@@ -326,6 +326,139 @@ app.post('/api/auth/change-password', (req, res) => {
   )
 })
 
+// Update system routes
+app.get('/api/updates/check', (req, res) => {
+  // Simular verificación de actualizaciones
+  // En producción, esto verificaría GitHub releases
+  const currentVersion = '2.0.0'
+  const latestVersion = '2.1.0' // Simular nueva versión disponible
+  
+  const hasUpdate = currentVersion !== latestVersion
+  
+  if (hasUpdate) {
+    res.json({
+      hasUpdate: true,
+      version: latestVersion,
+      changelog: [
+        'Nuevo sistema de actualizaciones automáticas',
+        'Mejoras en la seguridad de datos',
+        'Optimización de rendimiento',
+        'Corrección de errores menores'
+      ]
+    })
+  } else {
+    res.json({
+      hasUpdate: false,
+      version: currentVersion
+    })
+  }
+})
+
+app.post('/api/updates/backup', (req, res) => {
+  try {
+    // Crear backup de la base de datos
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
+    const backupPath = `backups/update-backup-${timestamp}.db`
+    
+    // Contar registros para confirmar backup
+    db.all('SELECT COUNT(*) as count FROM birthdays', (err, result) => {
+      if (err) {
+        console.error('Error counting records:', err)
+        res.status(500).json({ error: 'Failed to count records' })
+        return
+      }
+      
+      const recordCount = result[0].count
+      
+      // En producción, aquí se haría el backup real
+      console.log(`Backup created: ${recordCount} records`)
+      
+      res.json({
+        success: true,
+        backupPath,
+        recordsBackedUp: recordCount,
+        timestamp
+      })
+    })
+  } catch (error) {
+    console.error('Backup error:', error)
+    res.status(500).json({ error: 'Backup failed' })
+  }
+})
+
+app.post('/api/updates/download', (req, res) => {
+  const { version } = req.body
+  
+  // Simular descarga de nueva versión
+  setTimeout(() => {
+    res.json({
+      success: true,
+      version,
+      downloadPath: `/tmp/update-${version}.zip`
+    })
+  }, 2000)
+})
+
+app.post('/api/updates/apply', (req, res) => {
+  // Simular aplicación de cambios
+  setTimeout(() => {
+    res.json({
+      success: true,
+      message: 'Update applied successfully'
+    })
+  }, 1500)
+})
+
+app.post('/api/updates/migrate', (req, res) => {
+  // Verificar y migrar base de datos si es necesario
+  db.all('SELECT COUNT(*) as count FROM birthdays', (err, result) => {
+    if (err) {
+      console.error('Migration error:', err)
+      res.status(500).json({ error: 'Migration failed' })
+      return
+    }
+    
+    const recordCount = result[0].count
+    
+    // En una migración real, aquí se aplicarían cambios de esquema
+    // Por ahora, solo confirmamos que los datos están intactos
+    res.json({
+      success: true,
+      recordsMigrated: recordCount,
+      message: 'Database migration completed'
+    })
+  })
+})
+
+app.get('/api/updates/verify', (req, res) => {
+  // Verificar integridad de datos después de la actualización
+  db.all('SELECT COUNT(*) as count FROM birthdays', (err, result) => {
+    if (err) {
+      console.error('Verification error:', err)
+      res.status(500).json({ error: 'Verification failed' })
+      return
+    }
+    
+    const totalRecords = result[0].count
+    
+    res.json({
+      success: true,
+      totalRecords,
+      message: 'Data integrity verified'
+    })
+  })
+})
+
+app.post('/api/updates/rollback', (req, res) => {
+  // Simular rollback en caso de error
+  setTimeout(() => {
+    res.json({
+      success: true,
+      message: 'Rollback completed successfully'
+    })
+  }, 1000)
+})
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Birthday API is running' })

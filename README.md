@@ -64,7 +64,7 @@ npm run dev:full
 
 La aplicación estará disponible en:
 - **Frontend**: http://localhost:5173
-- **Backend API**: http://localhost:3001
+- **Backend API**: http://localhost:3005
 
 ### Producción
 

@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { User, Trophy, Star, Flame, Settings, LogOut, Key, Crown } from 'lucide-react'
+import { User, Trophy, Star, Flame, Settings, LogOut, Key, Crown, GitBranch } from 'lucide-react'
 import { useUser } from '../contexts/UserContext'
 import ChangePasswordModal from './ChangePasswordModal'
+import UpdateManager from './UpdateManager'
 
 const UserProfile = () => {
   const { user, points, badges, streak, logout } = useUser()
   const [showProfile, setShowProfile] = useState(false)
   const [showChangePassword, setShowChangePassword] = useState(false)
+  const [showUpdateManager, setShowUpdateManager] = useState(false)
 
   if (!user) return null
 
@@ -114,16 +116,28 @@ const UserProfile = () => {
           {/* Actions */}
           <div className="space-y-2">
             {user.isAdmin && (
-              <button 
-                onClick={() => {
-                  setShowChangePassword(true)
-                  setShowProfile(false)
-                }}
-                className="w-full flex items-center gap-2 p-2 text-left hover:bg-blue-50 dark:hover:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg transition-colors"
-              >
-                <Key className="w-4 h-4" />
-                <span className="text-sm">Cambiar Contraseña</span>
-              </button>
+              <>
+                <button 
+                  onClick={() => {
+                    setShowUpdateManager(true)
+                    setShowProfile(false)
+                  }}
+                  className="w-full flex items-center gap-2 p-2 text-left hover:bg-green-50 dark:hover:bg-green-900/20 text-green-600 dark:text-green-400 rounded-lg transition-colors"
+                >
+                  <GitBranch className="w-4 h-4" />
+                  <span className="text-sm">Actualizaciones</span>
+                </button>
+                <button 
+                  onClick={() => {
+                    setShowChangePassword(true)
+                    setShowProfile(false)
+                  }}
+                  className="w-full flex items-center gap-2 p-2 text-left hover:bg-blue-50 dark:hover:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg transition-colors"
+                >
+                  <Key className="w-4 h-4" />
+                  <span className="text-sm">Cambiar Contraseña</span>
+                </button>
+              </>
             )}
             <button className="w-full flex items-center gap-2 p-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
               <Settings className="w-4 h-4" />
@@ -138,9 +152,13 @@ const UserProfile = () => {
             </button>
           </div>
           
-          {/* Change Password Modal */}
+          {/* Modals */}
           {showChangePassword && (
             <ChangePasswordModal onClose={() => setShowChangePassword(false)} />
+          )}
+          
+          {showUpdateManager && (
+            <UpdateManager onClose={() => setShowUpdateManager(false)} />
           )}
         </motion.div>
       )}

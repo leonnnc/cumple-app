@@ -23,7 +23,7 @@ const BirthdayModal = ({ onClose, onSubmit, editingBirthday, birthdays = [] }) =
         birthDate: editingBirthday.birthDate || '',
         phone: editingBirthday.phone || '',
         photo: null,
-        isAdmin: editingBirthday.isAdmin || false
+        isAdmin: false
       })
       if (editingBirthday.photo) {
         setPhotoPreview(editingBirthday.photo)
@@ -97,15 +97,6 @@ const BirthdayModal = ({ onClose, onSubmit, editingBirthday, birthdays = [] }) =
     e.preventDefault()
     
     if (!validateForm()) return
-    
-    // Check if trying to create admin when one already exists
-    if (formData.isAdmin && !editingBirthday) {
-      const hasAdmin = birthdays.some(b => b.isAdmin)
-      if (hasAdmin) {
-        setErrors({ isAdmin: 'Ya existe un administrador en el sistema' })
-        return
-      }
-    }
     
     setIsSubmitting(true)
     try {
@@ -272,29 +263,7 @@ const BirthdayModal = ({ onClose, onSubmit, editingBirthday, birthdays = [] }) =
             </div>
           </div>
 
-          {/* Admin Checkbox - Only show if no admin exists or editing current admin */}
-          {(!birthdays.some(b => b.isAdmin) || (editingBirthday && editingBirthday.isAdmin)) && (
-            <div>
-              <div className="flex items-center gap-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                <input
-                  type="checkbox"
-                  id="isAdmin"
-                  checked={formData.isAdmin}
-                  onChange={(e) => setFormData({...formData, isAdmin: e.target.checked})}
-                  className="w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500"
-                />
-                <label htmlFor="isAdmin" className="flex items-center gap-2 text-sm font-medium text-yellow-800">
-                  ⭐ <span>Hacer administrador</span>
-                </label>
-              </div>
-              {errors.isAdmin && (
-                <p className="text-red-500 text-sm mt-1">{errors.isAdmin}</p>
-              )}
-              <p className="text-xs text-yellow-700 mt-1">
-                El administrador puede editar todos los cumpleaños sin restricciones.
-              </p>
-            </div>
-          )}
+
 
           {/* Buttons */}
           <div className="flex gap-3 pt-4">
