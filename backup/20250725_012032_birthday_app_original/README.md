@@ -1,4 +1,4 @@
-# 🎉 App de Cumpleaños
+# 🎉 Fam. ParAreMacPobReaBerCas
 
 Una aplicación moderna y responsive para gestionar cumpleaños con notificaciones automáticas, integración con WhatsApp y efectos visuales espectaculares.
 

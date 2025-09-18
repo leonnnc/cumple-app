@@ -25,24 +25,24 @@ const LoginModal = ({ onClose }) => {
 
   const validateForm = () => {
     const newErrors = {}
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'El usuario es requerido'
     }
-    
+
     if (!formData.password.trim()) {
       newErrors.password = 'La contraseña es requerida'
     }
-    
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
+
     if (!validateForm()) return
-    
+
     setIsSubmitting(true)
     try {
       const response = await fetch('/api/auth/login', {
@@ -52,9 +52,9 @@ const LoginModal = ({ onClose }) => {
         },
         body: JSON.stringify(formData)
       })
-      
+
       const data = await response.json()
-      
+
       if (response.ok) {
         login(data.user)
         onClose()
@@ -113,9 +113,8 @@ const LoginModal = ({ onClose }) => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                errors.email ? 'border-red-500' : `border-gray-300 ${theme.card} ${theme.text}`
-              }`}
+              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${errors.email ? 'border-red-500' : `border-gray-300 ${theme.card} ${theme.text}`
+                }`}
               placeholder="Usuario o email"
             />
             {errors.email && (
@@ -134,9 +133,8 @@ const LoginModal = ({ onClose }) => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 pr-10 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                  errors.password ? 'border-red-500' : `border-gray-300 ${theme.card} ${theme.text}`
-                }`}
+                className={`w-full px-3 py-2 pr-10 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${errors.password ? 'border-red-500' : `border-gray-300 ${theme.card} ${theme.text}`
+                  }`}
                 placeholder="Contraseña"
               />
               <button

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-// import { Toaster } from 'react-hot-toast' // Comentado temporalmente
+import { Toaster } from 'react-hot-toast'
 import { ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { UserProvider } from './contexts/UserContext'
 import Dashboard from './components/Dashboard'
@@ -12,6 +12,7 @@ import AIAssistant from './components/AIAssistant'
 import PWAInstaller from './components/PWAInstaller'
 import Navigation from './components/Navigation'
 import { getBirthdays, addBirthday } from './services/api'
+import toast from 'react-hot-toast'
 
 // Componente de carga
 const LoadingScreen = () => {
@@ -23,7 +24,7 @@ const LoadingScreen = () => {
                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                 className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full mb-4"
             />
-            <h2 className={`text-xl font-semibold ${theme.text} mb-2`}>🎉 App de Cumpleaños</h2>
+            <h2 className={`text-xl font-semibold ${theme.text} mb-2`}>🎉 Fam.ParAreMacPobReaBerCas</h2>
             <p className={`${theme.textSecondary}`}>Cargando...</p>
         </div>
     )
@@ -74,7 +75,7 @@ const AppContent = ({
             )}
 
             <PWAInstaller />
-            {/* <Toaster /> Comentado temporalmente hasta instalar react-hot-toast */}
+            <Toaster position="top-right" />
         </div>
     )
 }
@@ -98,9 +99,9 @@ function App() {
         if ('serviceWorker' in navigator) {
             try {
                 await navigator.serviceWorker.register('/sw.js')
-                console.log('Service Worker registered successfully')
+                // Service Worker registered successfully
             } catch (error) {
-                console.log('Service Worker registration failed:', error)
+                // Service Worker registration failed
             }
         }
     }
@@ -166,7 +167,7 @@ function App() {
             setEditingBirthday(null)
         } catch (error) {
             console.error('Error saving birthday:', error)
-            alert(`❌ Error: ${error.message}`)
+            toast.error(`Error: ${error.message}`)
         }
     }
 
@@ -194,14 +195,14 @@ function App() {
                 // Refresh the birthdays list
                 const updatedBirthdays = birthdays.filter(b => b.id !== birthdayId)
                 setBirthdays(updatedBirthdays)
-                alert('✅ Cumpleaños eliminado exitosamente')
+                toast.success('Cumpleaños eliminado exitosamente')
             } else {
                 const error = await response.json()
-                alert(`❌ Error: ${error.error}`)
+                toast.error(`Error: ${error.error}`)
             }
         } catch (error) {
             console.error('Error deleting birthday:', error)
-            alert('❌ Error de conexión al eliminar')
+            toast.error('Error de conexión al eliminar')
         }
     }
 

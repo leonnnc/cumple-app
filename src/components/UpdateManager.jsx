@@ -6,7 +6,7 @@ import { useTheme } from '../contexts/ThemeContext'
 const UpdateManager = ({ onClose }) => {
   const { theme } = useTheme()
   const [updateStatus, setUpdateStatus] = useState('checking') // checking, available, updating, success, error
-  const [currentVersion, setCurrentVersion] = useState('2.0.0')
+  const [currentVersion, setCurrentVersion] = useState('1.2.3')
   const [availableVersion, setAvailableVersion] = useState(null)
   const [changelog, setChangelog] = useState([])
   const [backupStatus, setBackupStatus] = useState(null)

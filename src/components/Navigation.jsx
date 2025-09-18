@@ -34,7 +34,7 @@ const Navigation = ({ currentView, onViewChange }) => {
               🎉
             </motion.div>
             <h1 className={`text-xl font-bold ${theme.text}`}>
-              App de Cumpleaños
+              Fam.ParAreMacPobReaBerCas
             </h1>
           </div>
 

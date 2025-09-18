@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { X, Lock, Eye, EyeOff, Key } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
 import { useUser } from '../contexts/UserContext'
+import toast from 'react-hot-toast'
 
 const ChangePasswordModal = ({ onClose }) => {
   const { theme } = useTheme()
@@ -77,7 +78,7 @@ const ChangePasswordModal = ({ onClose }) => {
       const data = await response.json()
       
       if (response.ok) {
-        alert('✅ Contraseña cambiada exitosamente')
+        toast.success('Contraseña cambiada exitosamente')
         onClose()
       } else {
         setErrors({ general: data.error || 'Error al cambiar contraseña' })

@@ -9,11 +9,14 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const app = express()
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3002
 
 // Middleware
 app.use(cors())
 app.use(express.json())
+
+// Serve static files from the dist directory
+app.use(express.static(join(__dirname, '../dist')))
 
 // Utility functions
 function formatDateForPassword(birthDate) {
@@ -330,8 +333,8 @@ app.post('/api/auth/change-password', (req, res) => {
 app.get('/api/updates/check', (req, res) => {
   // Simular verificación de actualizaciones
   // En producción, esto verificaría GitHub releases
-  const currentVersion = '2.0.0'
-  const latestVersion = '2.1.0' // Simular nueva versión disponible
+  const currentVersion = '1.2.3'
+  const latestVersion = '1.3.0' // Simular nueva versión disponible
   
   const hasUpdate = currentVersion !== latestVersion
   
@@ -462,6 +465,13 @@ app.post('/api/updates/rollback', (req, res) => {
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Birthday API is running' })
+})
+
+// Serve the React app for all non-API routes
+app.get('*', (req, res) => {
+  if (!req.path.startsWith('/api')) {
+    res.sendFile(join(__dirname, '../dist/index.html'))
+  }
 })
 
 app.listen(PORT, () => {

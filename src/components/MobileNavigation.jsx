@@ -197,7 +197,7 @@ const MobileNavigation = ({ currentView, onViewChange }) => {
                 {/* Footer */}
                 <div className="mt-8 pt-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 -mx-4 px-4 pb-4">
                   <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-                    🎉 App de Cumpleaños v1.0
+                    🎉 Fam.ParAreMacPobReaBerCas v1.1
                   </p>
                 </div>
               </div>

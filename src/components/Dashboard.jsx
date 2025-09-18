@@ -55,7 +55,7 @@ const Dashboard = ({ birthdays, onAddBirthday, onCelebrate, onEditBirthday, onDe
         className="text-center mb-8"
       >
         <h1 className={`text-4xl font-bold ${theme.text} mb-2`}>
-          🎉 App de Cumpleaños
+          🎉 Fam.ParAreMacPobReaBerCas
         </h1>
         <p className={`${theme.textSecondary}`}>Nunca olvides un cumpleaños importante</p>
       </motion.div>

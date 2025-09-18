@@ -92,13 +92,20 @@ temp/
 ehthumbs.db
 Thumbs.db
 
-# SQLite databases (opcional - comentar si quieres incluir la DB)
-# *.db
-# *.sqlite
-# *.sqlite3
+# SQLite databases (mantener DB de desarrollo)
+server/birthdays.db
 
-# Backups (opcional)
+# Backups (mantener backups locales)
 backups/
+backup/
+
+# Production builds
+cumple-app-production/
+production-build/
+
+# Compressed files
+*.zip
+*.tar.gz
 
 # Vercel
 .vercel

@@ -2,12 +2,7 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Bot, Send, Sparkles, MessageCircle, Copy, RefreshCw } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
-
-// Función toast temporal (reemplazar con react-hot-toast después de instalar)
-const toast = {
-  success: (message) => alert(`✅ ${message}`),
-  error: (message) => alert(`❌ ${message}`)
-}
+import toast from 'react-hot-toast'
 
 const AIAssistant = ({ person, onMessageGenerated }) => {
   const { theme } = useTheme()

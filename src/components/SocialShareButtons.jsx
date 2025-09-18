@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import toast from 'react-hot-toast'
 import { 
   MessageCircle, 
   Phone, 
@@ -14,11 +15,6 @@ import {
   Copy,
   Share2
 } from 'lucide-react'
-// Función toast temporal (reemplazar con react-hot-toast después de instalar)
-const toast = {
-  success: (message) => alert(`✅ ${message}`),
-  error: (message) => alert(`❌ ${message}`)
-}
 
 const SocialShareButtons = ({ person, message, compact = false }) => {
   const defaultMessage = message || `🎉 ¡Feliz cumpleaños ${person.name}! 🎂 Que tengas un día maravilloso lleno de alegría y sorpresas. ¡Muchas felicidades! 🎈✨`

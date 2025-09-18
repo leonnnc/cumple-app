@@ -10,11 +10,7 @@ import {
   Copy,
   Share2
 } from 'lucide-react'
-// Función toast temporal (reemplazar con react-hot-toast después de instalar)
-const toast = {
-  success: (message) => alert(`✅ ${message}`),
-  error: (message) => alert(`❌ ${message}`)
-}
+import toast from 'react-hot-toast'
 import SocialShareButtons from './SocialShareButtons'
 
 const CommunicationHub = ({ person, message, onClose }) => {

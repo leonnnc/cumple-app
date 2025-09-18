@@ -1,4 +1,4 @@
-# 🚀 Guía de Deploy - App de Cumpleaños
+# 🚀 Guía de Deploy - Fam. ParAreMacPobReaBerCas
 
 ## 📋 **Preparación Completada:**
 - ✅ `vercel.json` configurado
@@ -20,7 +20,7 @@ git init
 git add .
 
 # Commit inicial
-git commit -m "🎉 App de cumpleaños lista para deploy"
+git commit -m "🎉 Fam. ParAreMacPobReaBerCas lista para deploy"
 
 # Crear repositorio en GitHub y conectar
 git remote add origin https://github.com/TU_USUARIO/cumple-app.git
@@ -38,9 +38,15 @@ git push -u origin main
    - **Output Directory:** `dist`
 5. Clic en "Deploy"
 
-### **Variables de Entorno (si necesarias):**
-```
+### **Variables de Entorno (¡Muy Importante!)**
+Para que tu aplicación funcione de forma segura en producción, debes configurar las siguientes variables de entorno en el panel de tu proveedor de hosting (Vercel, Railway, etc.). **Nunca guardes secretos directamente en el código.**
+
+```sh
 NODE_ENV=production
+ADMIN_USER=Leonnnc
+ADMIN_PASSWORD=tu_contraseña_segura_aqui
+# Agrega aquí otras claves si las usas (ej. para OpenAI, Nodemailer, etc.)
+# API_KEY_OPENAI=...
 ```
 
 ---
@@ -104,10 +110,6 @@ npm run dev:full
 1. ✅ Tu app estará disponible en una URL como: `https://tu-app.vercel.app`
 2. ✅ El backend funcionará en la misma URL: `https://tu-app.vercel.app/api`
 3. ✅ La base de datos SQLite funcionará (para proyectos pequeños)
-
-## 🔐 **Credenciales de Admin:**
-- **Usuario:** Leonnnc
-- **Contraseña:** appcumple25
 
 ## ⚠️ **Notas Importantes:**
 - La base de datos SQLite es temporal en algunos hostings

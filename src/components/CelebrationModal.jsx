@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { X, MessageCircle, Share2, Download } from 'lucide-react'
+import toast from 'react-hot-toast'
 import Confetti from 'react-confetti'
 
 const CelebrationModal = ({ person, onClose }) => {
@@ -56,13 +57,13 @@ const CelebrationModal = ({ person, onClose }) => {
           url: window.location.href
         })
       } catch (error) {
-        console.log('Error sharing:', error)
+        // Error sharing
       }
     } else {
       // Fallback: copy to clipboard
       const text = `🎉 ¡Feliz cumpleaños ${person.name}! 🎂 ¡Que tengas un día maravilloso!`
       navigator.clipboard.writeText(text)
-      alert('¡Mensaje copiado al portapapeles!')
+      toast.success('¡Mensaje copiado al portapapeles!')
     }
   }
 
