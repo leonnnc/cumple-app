@@ -84,10 +84,18 @@ const BirthdayCard = ({ birthday, onCelebrate, onEdit, onDelete, isToday = false
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl ${
+          <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl overflow-hidden ${
             isToday ? 'bg-yellow-100' : 'bg-purple-100'
           }`}>
-            {birthday.name.charAt(0).toUpperCase()}
+            {birthday.photo ? (
+              <img 
+                src={birthday.photo} 
+                alt={birthday.name} 
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              birthday.name.charAt(0).toUpperCase()
+            )}
           </div>
           <div>
             <h3 className="font-semibold text-gray-800">{birthday.name}</h3>

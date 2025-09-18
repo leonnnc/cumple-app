@@ -7,6 +7,7 @@ import ThemeSelector from './ThemeSelector'
 import UserProfile from './UserProfile'
 import MobileNavigation from './MobileNavigation'
 import LoginModal from './LoginModal'
+import VersionBadge from './VersionBadge'
 
 const Navigation = ({ currentView, onViewChange }) => {
   const { theme } = useTheme()
@@ -33,8 +34,10 @@ const Navigation = ({ currentView, onViewChange }) => {
             >
               🎉
             </motion.div>
-            <h1 className={`text-xl font-bold ${theme.text}`}>
-              Fam.ParAreMacPobReaBerCas
+            <h1 className={`text-sm sm:text-lg md:text-xl font-bold ${theme.text} leading-tight`}>
+              <span className="hidden lg:inline">Familia ParAreMacPobReaBerCas</span>
+              <span className="hidden sm:inline lg:hidden">Familia ParAre...</span>
+              <span className="sm:hidden">Familia</span>
             </h1>
           </div>
 
@@ -72,6 +75,9 @@ const Navigation = ({ currentView, onViewChange }) => {
 
           {/* Right Side */}
           <div className="flex items-center gap-3">
+            {/* Version Badge - Always visible */}
+            <VersionBadge />
+            
             {/* Desktop - Always visible */}
             <div className="hidden md:flex items-center gap-3">
               <ThemeSelector />

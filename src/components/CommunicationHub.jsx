@@ -85,8 +85,16 @@ const CommunicationHub = ({ person, message, onClose }) => {
         <div className="p-6 space-y-6">
           {/* Person Info */}
           <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
-              {person.name.charAt(0).toUpperCase()}
+            <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-xl overflow-hidden">
+              {person.photo ? (
+                <img 
+                  src={person.photo} 
+                  alt={person.name} 
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                person.name.charAt(0).toUpperCase()
+              )}
             </div>
             <div>
               <h3 className="font-semibold text-gray-800 dark:text-white">{person.name}</h3>

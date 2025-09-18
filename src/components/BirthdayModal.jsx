@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { X, User, Mail, Calendar, Gift, Phone } from 'lucide-react'
+import toast from 'react-hot-toast'
 
 const BirthdayModal = ({ onClose, onSubmit, editingBirthday, birthdays = [] }) => {
   const [formData, setFormData] = useState({
@@ -53,12 +54,49 @@ const BirthdayModal = ({ onClose, onSubmit, editingBirthday, birthdays = [] }) =
   const handlePhotoChange = (e) => {
     const file = e.target.files[0]
     if (file) {
+      // Check file size (limit to 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error('La imagen es demasiado grande. Selecciona una imagen menor a 5MB.')
+        return
+      }
+
       setFormData(prev => ({ ...prev, photo: file }))
       
-      // Create preview
+      // Create compressed preview
       const reader = new FileReader()
       reader.onload = (e) => {
-        setPhotoPreview(e.target.result)
+        const img = new Image()
+        img.onload = () => {
+          // Create canvas for compression
+          const canvas = document.createElement('canvas')
+          const ctx = canvas.getContext('2d')
+          
+          // Calculate new dimensions (max 400px width/height)
+          const maxSize = 400
+          let { width, height } = img
+          
+          if (width > height) {
+            if (width > maxSize) {
+              height = (height * maxSize) / width
+              width = maxSize
+            }
+          } else {
+            if (height > maxSize) {
+              width = (width * maxSize) / height
+              height = maxSize
+            }
+          }
+          
+          canvas.width = width
+          canvas.height = height
+          
+          // Draw and compress
+          ctx.drawImage(img, 0, 0, width, height)
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8)
+          
+          setPhotoPreview(compressedDataUrl)
+        }
+        img.src = e.target.result
       }
       reader.readAsDataURL(file)
     }
@@ -100,9 +138,36 @@ const BirthdayModal = ({ onClose, onSubmit, editingBirthday, birthdays = [] }) =
     
     setIsSubmitting(true)
     try {
-      await onSubmit(formData)
+      // Prepare form data with photo as base64 if exists
+      const submitData = { ...formData }
+      
+      // If there's a photo file, use the preview (which is already base64)
+      if (formData.photo && photoPreview && photoPreview.startsWith('data:')) {
+        submitData.photo = photoPreview
+      } else if (formData.photo) {
+        // If somehow we have a file but no preview, convert it
+        const reader = new FileReader()
+        const photoBase64 = await new Promise((resolve) => {
+          reader.onload = (e) => resolve(e.target.result)
+          reader.readAsDataURL(formData.photo)
+        })
+        submitData.photo = photoBase64
+      } else {
+        submitData.photo = photoPreview // This could be existing photo URL or null
+      }
+      
+      await onSubmit(submitData)
     } catch (error) {
       console.error('Error submitting form:', error)
+      
+      // Show user-friendly error message
+      if (error.message.includes('JSON') || error.message.includes('Unexpected token')) {
+        toast.error('Problema con el formato de datos. Intenta con una imagen más pequeña.')
+      } else if (error.message.includes('Failed to fetch')) {
+        toast.error('Error de conexión. Verifica que el servidor esté funcionando.')
+      } else {
+        toast.error('Error al guardar: ' + error.message)
+      }
     } finally {
       setIsSubmitting(false)
     }

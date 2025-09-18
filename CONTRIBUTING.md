@@ -1,6 +1,6 @@
 # 🤝 Guía de Contribución
 
-¡Gracias por tu interés en contribuir a Birthday App! Esta guía te ayudará a empezar.
+¡Gracias por tu interés en contribuir a Familia ParAreMacPobReaBerCas! Esta guía te ayudará a empezar.
 
 ## 🚀 Cómo Contribuir
 
@@ -141,4 +141,4 @@ Para nuevas funcionalidades:
 
 Todos los contribuidores serán reconocidos en el README principal.
 
-¡Gracias por hacer Birthday App mejor! 🎉
+¡Gracias por hacer Familia ParAreMacPobReaBerCas mejor! 🎉

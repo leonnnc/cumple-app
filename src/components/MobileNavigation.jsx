@@ -6,6 +6,7 @@ import { useUser } from '../contexts/UserContext'
 import ThemeSelector from './ThemeSelector'
 import UserProfile from './UserProfile'
 import LoginModal from './LoginModal'
+import VersionBadge from './VersionBadge'
 
 const MobileNavigation = ({ currentView, onViewChange }) => {
   const { theme } = useTheme()
@@ -196,9 +197,17 @@ const MobileNavigation = ({ currentView, onViewChange }) => {
 
                 {/* Footer */}
                 <div className="mt-8 pt-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 -mx-4 px-4 pb-4">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-                    🎉 Fam.ParAreMacPobReaBerCas v1.1
-                  </p>
+                  <div className="text-center space-y-2">
+                    <p className="text-xs text-gray-400 dark:text-gray-500">
+                      Sistema de Cumpleaños
+                    </p>
+                    <div className="flex items-center justify-center gap-2">
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        🎉 Familia ParAreMacPobReaBerCas
+                      </p>
+                      <VersionBadge />
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>

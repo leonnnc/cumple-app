@@ -54,9 +54,15 @@ const Dashboard = ({ birthdays, onAddBirthday, onCelebrate, onEditBirthday, onDe
         animate={{ opacity: 1, y: 0 }}
         className="text-center mb-8"
       >
-        <h1 className={`text-4xl font-bold ${theme.text} mb-2`}>
-          🎉 Fam.ParAreMacPobReaBerCas
-        </h1>
+        <div className="text-center mb-6">
+          <p className={`text-sm sm:text-base ${theme.textSecondary} mb-3 px-4`}>
+            ¡Bienvenidos al Sistema de Cumpleaños!
+          </p>
+          <h1 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold ${theme.text} mb-2 px-2 leading-tight`}>
+            <span className="block sm:inline">🎉 Familia</span>
+            <span className="block sm:inline"> ParAreMacPobReaBerCas</span>
+          </h1>
+        </div>
         <p className={`${theme.textSecondary}`}>Nunca olvides un cumpleaños importante</p>
       </motion.div>
 

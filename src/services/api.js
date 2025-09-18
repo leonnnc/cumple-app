@@ -21,7 +21,15 @@ export const addBirthday = async (birthdayData) => {
       body: JSON.stringify(birthdayData)
     })
     
-    if (!response.ok) throw new Error('Failed to add birthday')
+    if (!response.ok) {
+      const contentType = response.headers.get('content-type')
+      if (contentType && contentType.includes('application/json')) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to add birthday')
+      } else {
+        throw new Error(`Server error: ${response.status} ${response.statusText}`)
+      }
+    }
     return await response.json()
   } catch (error) {
     console.error('Error adding birthday:', error)

@@ -5,6 +5,26 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.4] - 2025-09-18
+
+### ✅ Agregado
+- Compresión automática de imágenes (máx 400px, calidad 80%)
+- Validación de tamaño de archivos (máx 5MB)
+- Mejor manejo de errores con toast notifications
+- Límite aumentado del servidor para imágenes base64 (10MB)
+
+### 🔧 Corregido
+- Error "Unexpected token" al subir fotos
+- Problema de límite de tamaño en peticiones POST
+- Manejo de respuestas no-JSON del servidor
+- Mensajes de error más informativos
+
+### 🧹 Limpiado
+- Console.log de debugging removidos
+- Comentarios innecesarios eliminados
+- Mensajes de error mejorados con toast
+- Código optimizado para producción
+
 ## [1.2.3] - 2025-09-18
 
 ### ✅ Agregado

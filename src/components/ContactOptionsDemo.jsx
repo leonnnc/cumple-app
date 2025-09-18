@@ -161,8 +161,16 @@ const ContactOptionsDemo = () => {
         animate={{ opacity: 1, scale: 1 }}
         className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl p-6 text-white text-center"
       >
-        <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-4">
-          {selectedPerson.name.charAt(0)}
+        <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-4 overflow-hidden">
+          {selectedPerson.photo ? (
+            <img 
+              src={selectedPerson.photo} 
+              alt={selectedPerson.name} 
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            selectedPerson.name.charAt(0)
+          )}
         </div>
         <h2 className="text-2xl font-bold mb-2">{selectedPerson.name}</h2>
         <div className="flex items-center justify-center gap-6 text-sm">

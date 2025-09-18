@@ -11,6 +11,7 @@ import EventsManager from './components/EventsManager'
 import AIAssistant from './components/AIAssistant'
 import PWAInstaller from './components/PWAInstaller'
 import Navigation from './components/Navigation'
+import Footer from './components/Footer'
 import { getBirthdays, addBirthday } from './services/api'
 import toast from 'react-hot-toast'
 
@@ -24,7 +25,15 @@ const LoadingScreen = () => {
                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                 className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full mb-4"
             />
-            <h2 className={`text-xl font-semibold ${theme.text} mb-2`}>🎉 Fam.ParAreMacPobReaBerCas</h2>
+            <div className="text-center mb-4">
+              <p className={`text-sm ${theme.textSecondary} mb-2`}>
+                ¡Bienvenidos al Sistema de Cumpleaños!
+              </p>
+              <h2 className={`text-lg sm:text-xl font-semibold ${theme.text} px-4 leading-tight`}>
+                <span className="block sm:inline">🎉 Familia</span>
+                <span className="block sm:inline"> ParAreMacPobReaBerCas</span>
+              </h2>
+            </div>
             <p className={`${theme.textSecondary}`}>Cargando...</p>
         </div>
     )
@@ -48,12 +57,14 @@ const AppContent = ({
     const { theme } = useTheme()
 
     return (
-        <div className={`min-h-screen ${theme.background} transition-all duration-500`}>
+        <div className={`min-h-screen ${theme.background} transition-all duration-500 flex flex-col`}>
             <Navigation currentView={currentView} onViewChange={setCurrentView} />
 
-            <main className="pt-20">
+            <main className="pt-20 flex-1">
                 {renderCurrentView()}
             </main>
+
+            <Footer />
 
             {showModal && (
                 <BirthdayModal
